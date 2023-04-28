@@ -23,16 +23,39 @@ const Login = () => {
     }
   }, [token]);
 
+  // const loginBtn = () => {
+  //   APIService.LoginUser({
+  //     username: username,
+  //     password: password,
+  //   })
+  //     .then((response) => {
+  //       setToken("loginToken", response.token);
+  //       setLogUser("fname", response.fname);
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
+  const [errorMessage, setErrorMessage] = useState("");
+
   const loginBtn = () => {
     APIService.LoginUser({
       username: username,
       password: password,
     })
       .then((response) => {
-        setToken("loginToken", response.token);
-        setLogUser("fname", response.fname);
+        if (response.token) {
+          setToken("loginToken", response.token);
+          setLogUser("fname", response.fname);
+        } else {
+          setErrorMessage("An error occurred. Please try again later.");
+        }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 400)) {
+          setErrorMessage("Invalid username or password");
+        } else {
+          setErrorMessage("An error occurred. Please try again later.");
+        }
+      });
   };
 
   const registerBtn = () => {
