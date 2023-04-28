@@ -4,7 +4,7 @@ from rest_framework import routers
 from api import views as api_views
 
 api_router = routers.DefaultRouter()
-api_router.register(r'project', api_views.ProjectView, 'project')
+api_router.register(r'project', api_views.IncidentView, 'project')
 api_router.register(r'users', api_views.UserView, 'users')
 
 urlpatterns = [
