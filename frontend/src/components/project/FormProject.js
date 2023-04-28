@@ -52,12 +52,8 @@ function FormProject(props) {
     <div className="overlay">
       {props.ProjectInstance ? (
         <div className="mb-3 text-light modal-card">
-          <button
-            onClick={() => props.setProjectInstance(null)}
-            className="btn btn-primary close-btn"
-          >
-            x
-          </button>
+          <button onClick={() => props.setProjectInstance(null)}
+            className="btn btn-primary close-btn"> x </button>
           <label htmlFor="description" className="form-label">
             Project Description
           </label>
@@ -91,7 +87,7 @@ function FormProject(props) {
           <br />
 
           <label htmlFor="closed_status" className="form-label">
-            Closed Status
+            Closed Status:
           </label>
           <select
             onChange={(e) => setProjectClosedStatus(e.target.value)}
@@ -104,22 +100,6 @@ function FormProject(props) {
             <option value="False">False</option>
           </select>
           <br />
-
-
-          {/* <select
-            onChange={(e) => setProjectClosedStatus(e.target.value)}
-            className="form-select"
-            name="closed_status"
-            id="closed_status"
-          >
-            <option value="none" selected disabled hidden>
-              Select a close status...
-            </option>
-            {clients.map((client) => {
-              return <option value={client.name}>{client.name}</option>;
-            })}
-          </select>
-          <br /> */}
 
           {props.ProjectInstance.id ? (
             <button onClick={updateProject} className="btn btn-primary">
