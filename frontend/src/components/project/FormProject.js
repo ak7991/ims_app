@@ -12,8 +12,6 @@ function FormProject(props) {
   const [ProjectPriority, setProjectPriority] = useState("");
   const [ProjectClosedStatus, setProjectClosedStatus] = useState("");
 
-  const [clients, setClients] = useState([]);
-
   const [token, setToken] = useCookies(["loginToken"]);
 
   useEffect(() => {
@@ -23,20 +21,6 @@ function FormProject(props) {
     setProjectPriority(props.ProjectInstance.priority);
     setProjectClosedStatus(props.ProjectInstance.closed_status);
   }, [props.ProjectInstance]);
-
-  // FETCH THE CLIENTS HERE TO BE RENDERED FOR THE DROPDOWN MENU IN THE FORM
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/api/client", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Token ${token["loginToken"]}`,
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((response) => setClients(response))
-  //     .catch((error) => console.log(error));
-  // }, [token]);
 
   const updateProject = () => {
     APIService.UpdateProject(
@@ -115,7 +99,6 @@ function FormProject(props) {
             name="closed_status"
             id="closed_status"
             value={ProjectClosedStatus}
-
           >
             <option value="True">True</option>
             <option value="False">False</option>
