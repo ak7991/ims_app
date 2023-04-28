@@ -22,7 +22,7 @@ class Incident(models.Model):
     
     incident_id = models.CharField(max_length=12, unique=True, editable=False, 
                                    default=create_inc_id, null=False)
-    date_created = models.DateTimeField(auto_now_add=True, null=False, blank=False, auto_created=True)
+    date_created = models.DateTimeField(auto_now_add=True,null=False, blank=False, auto_created=True)
     description = models.TextField(max_length=128, null=True, blank=True)
     priority = models.CharField(max_length=20, null=False, choices=PRIORITY, default="LOW")
     user = models.ForeignKey(
