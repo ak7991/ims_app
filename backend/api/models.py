@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 from datetime import datetime
@@ -22,9 +23,11 @@ class Incident(models.Model):
     
     incident_id = models.CharField(max_length=12, unique=True, editable=False, 
                                    default=create_inc_id, null=False)
-    date_created = models.DateTimeField(auto_now_add=True,null=False, blank=False, auto_created=True)
+    date_created = models.DateTimeField(default=timezone.now ,
+                                        null=False, blank=False, auto_created=True)
     description = models.TextField(max_length=128, null=True, blank=True)
-    priority = models.CharField(max_length=20, null=False, choices=PRIORITY, default="LOW")
+    priority = models.CharField(max_length=20, null=False, choices=PRIORITY, 
+                                default="LOW")
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
     closed_status = models.BooleanField(null=False, default=True)
@@ -36,4 +39,6 @@ class Incident(models.Model):
                 self.__getattribute__(field).editable = False
 
     def __str__(self):
-        return str(self.incident_id) + " - " + str(self.priority) + " - " + str(self.closed_status) + ' date: ' + datetime.strftime(self.date_created,"%d/%m/%Y, %H:%M:%S")
+        return str(self.incident_id) + " - " + str(self.priority) + " - " + \
+                str(self.closed_status) + ' date: ' + datetime.strftime(self.date_created, \
+                                                                        "%d/%m/%Y, %H:%M:%S")

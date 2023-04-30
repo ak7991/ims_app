@@ -25,7 +25,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'first_name',
                   'last_name', 'email', 'password']
 
-        extra_kwargs = {'password': {  # This allows any API call to the /api/users to only show username and not the password
+        extra_kwargs = {'password': {  # This allows any API call to the api/users to only show username and not the password
             'write_only': True,
             'required': True,
         }}
