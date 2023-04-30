@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
-import Incident from "../project/Project";
+import Incident from "../project/Incident";
 
 const Home = () => {
   const [logUser, removeLogUser] = useCookies(["fname"]);

@@ -16,8 +16,8 @@ export default class APIService {
     }).then((response) => response.json());
   }
 
-  static UpdateProject(project_id, body, token) {
-    return fetch(`${BACKEND_URL}api/project/${project_id}/`, {
+  static UpdateIncident(incident_id, body, token) {
+    return fetch(`${BACKEND_URL}api/incident/${incident_id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -27,8 +27,8 @@ export default class APIService {
     }).then((response) => response.json());
   }
 
-  static CreateProject(body, token) {
-    return fetch(`${BACKEND_URL}api/project/`, {
+  static CreateIncident(body, token) {
+    return fetch(`${BACKEND_URL}api/incident/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

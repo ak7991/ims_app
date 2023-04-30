@@ -31,7 +31,7 @@ const Client = () => {
   const [ClientInstance, setClientInstance] = useState(null);
 
   const [ActiveClient, setActiveClient] = useState(null);
-  const [ClientProjects, setClientProjects] = useState(null);
+  const [ClientIncidents, setClientIncidents] = useState(null);
 
   const detailBtn = (client) => {
     setActiveClient(client);
@@ -43,7 +43,7 @@ const Client = () => {
       },
     })
       .then((response) => response.json())
-      .then((response) => setClientProjects(response));
+      .then((response) => setClientIncidents(response));
   };
 
   const editClientBtn = (client) => {
@@ -149,11 +149,11 @@ const Client = () => {
         />
       ) : null}
 
-      {ClientProjects ? (
+      {ClientIncidents ? (
         <DetailClient
           ActiveClient={ActiveClient}
-          ClientProjects={ClientProjects}
-          setClientProjects={setClientProjects}
+          ClientIncidents={ClientIncidents}
+          setClientIncidents={setClientIncidents}
         />
       ) : null}
     </div>

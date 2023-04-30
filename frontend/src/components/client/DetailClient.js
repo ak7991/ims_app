@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import dateFormat from "dateformat";
 
-const StyledClientProject = styled.div`
+const StyledClientIncident = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -25,14 +25,14 @@ const StyledClientProject = styled.div`
 
 const DetailClient = (props) => {
   return (
-    <StyledClientProject>
+    <StyledClientIncident>
       <div className="client-project-card">
         <div className="client-detail text-white">
           <div className="client-detail-header d-flex align-items-center justify-content-between">
             <h1>Client Details</h1>
             <button
               onClick={() => {
-                props.setClientProjects(null);
+                props.setClientIncidents(null);
               }}
               className="btn btn-primary"
             >
@@ -47,7 +47,7 @@ const DetailClient = (props) => {
         <br />
         <br />
         <div className="client-projects text-white">
-          <h1>Projects</h1>
+          <h1>Incidents</h1>
           <hr />
           <table className="table text-white">
             <thead>
@@ -58,7 +58,7 @@ const DetailClient = (props) => {
               </tr>
             </thead>
             <tbody>
-              {props.ClientProjects.map((project) => {
+              {props.ClientIncidents.map((project) => {
                 return (
                   <tr key={project.id}>
                     <td>{project.name}</td>
@@ -71,7 +71,7 @@ const DetailClient = (props) => {
           </table>
         </div>
       </div>
-    </StyledClientProject>
+    </StyledClientIncident>
   );
 };
 

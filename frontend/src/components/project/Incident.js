@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import dateFormat from "dateformat";
 import { useCookies } from "react-cookie";
 
-import "./Project.css";
+import "./Incident.css";
 
-import FormProject from "./FormProject";
-import DetailProject from "./DetailProject";
+import FormIncident from "./FormIncident";
+import DetailIncident from "./DetailIncident";
 
 import dotenv from 'dotenv';
 dotenv.config();
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 const Incident = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setIncidents] = useState([]);
   // const [incident, setIncidents] = useState([]);
 
   const [token] = useCookies(["loginToken"]);
@@ -26,17 +26,17 @@ const Incident = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setProjects(data))
+      .then((data) => setIncidents(data))
       .catch((error) => console.log(error));
   }, [token]);
 
-  const [ProjectInstance, setProjectInstance] = useState(null);
+  const [IncidentInstance, setIncidentInstance] = useState(null);
 
-  const editProjectBtn = (project) => {
-    setProjectInstance(project);
+  const editIncidentBtn = (project) => {
+    setIncidentInstance(project);
   };
 
-  const updatedProjects = (project) => {
+  const updatedIncidents = (project) => {
     const new_project = projects.map((myproject) => {
       if (myproject.id === project.id) {
         return project;
@@ -44,11 +44,11 @@ const Incident = () => {
         return myproject;
       }
     });
-    setProjects(new_project);
+    setIncidents(new_project);
   };
 
   const projectNewForm = () => {
-    setProjectInstance({
+    setIncidentInstance({
       name: "",
       deadline: "",
       description: "",
@@ -57,15 +57,15 @@ const Incident = () => {
     });
   };
 
-  const createdProject = (project) => {
+  const createdIncident = (project) => {
     const new_project = [...projects, project];
-    setProjects(new_project);
+    setIncidents(new_project);
   };
 
-  const [ActiveProject, setActiveProject] = useState();
+  const [ActiveIncident, setActiveIncident] = useState();
 
-  const viewProjectDetail = (project) => {
-    setActiveProject(project);
+  const viewIncidentDetail = (project) => {
+    setActiveIncident(project);
     fetch(`${BACKEND_URL}api/project?project=${project.id}`, {
       method: "GET",
       headers: {
@@ -113,13 +113,13 @@ const Incident = () => {
               <p>Status: {String(project.closed_status)}</p>
               <div className="project-btn-wrapper">
                 <button
-                  onClick={() => viewProjectDetail(project)}
+                  onClick={() => viewIncidentDetail(project)}
                   className="btn btn-primary btn-sm"
                 >
                   View
                 </button>
                 <button
-                  onClick={() => editProjectBtn(project)}
+                  onClick={() => editIncidentBtn(project)}
                   className="btn btn-primary btn-sm mx-3"
                 >
                   Update
@@ -131,19 +131,19 @@ const Incident = () => {
           );
         })}
       </div>
-      {ProjectInstance ? (
-        <FormProject
-          ProjectInstance={ProjectInstance}
-          setProjectInstance={setProjectInstance}
-          updatedProjects={updatedProjects}
-          createdProject={createdProject}
+      {IncidentInstance ? (
+        <FormIncident
+          IncidentInstance={IncidentInstance}
+          setIncidentInstance={setIncidentInstance}
+          updatedIncidents={updatedIncidents}
+          createdIncident={createdIncident}
         />
       ) : null}
 
-      {ActiveProject ? (
-        <DetailProject
-          ActiveProject={ActiveProject}
-          setActiveProject={setActiveProject}
+      {ActiveIncident ? (
+        <DetailIncident
+          ActiveIncident={ActiveIncident}
+          setActiveIncident={setActiveIncident}
         />
       ) : null}
     </div>
