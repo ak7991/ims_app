@@ -16,7 +16,7 @@ const Client = () => {
   const [token, setToken] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/client`, {
+    fetch(`${BACKEND_URL}api/client`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ const Client = () => {
 
   const detailBtn = (client) => {
     setActiveClient(client);
-    fetch(`${BACKEND_URL}/api/project?client=${client.id}`, {
+    fetch(`${BACKEND_URL}api/project?client=${client.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -18,7 +18,7 @@ const Incident = () => {
   const [token] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    fetch(`${BACKEND_URL}/api/project`, {
+    fetch(`${BACKEND_URL}api/project`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const Incident = () => {
 
   const viewProjectDetail = (project) => {
     setActiveProject(project);
-    fetch(`${BACKEND_URL}/api/project?project=${project.id}`, {
+    fetch(`${BACKEND_URL}api/project?project=${project.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
