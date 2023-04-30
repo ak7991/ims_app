@@ -7,6 +7,10 @@ import "./Project.css";
 import FormProject from "./FormProject";
 import DetailProject from "./DetailProject";
 
+import dotenv from 'dotenv';
+dotenv.config();
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
 const Incident = () => {
   const [projects, setProjects] = useState([]);
   // const [incident, setIncidents] = useState([]);
@@ -14,7 +18,7 @@ const Incident = () => {
   const [token] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/project", {
+    fetch(`${BACKEND_URL}/api/project`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +66,7 @@ const Incident = () => {
 
   const viewProjectDetail = (project) => {
     setActiveProject(project);
-    fetch(`http://127.0.0.1:8000/api/project?project=${project.id}`, {
+    fetch(`${BACKEND_URL}/api/project?project=${project.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

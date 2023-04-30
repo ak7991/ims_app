@@ -1,6 +1,12 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export default class APIService {
+
   static UpdateClient(client_id, body, token) {
-    return fetch(`http://127.0.0.1:8000/api/client/${client_id}/`, {
+    return fetch(`${BACKEND_URL}api/client/${client_id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -11,7 +17,7 @@ export default class APIService {
   }
 
   static UpdateProject(project_id, body, token) {
-    return fetch(`http://127.0.0.1:8000/api/project/${project_id}/`, {
+    return fetch(`${BACKEND_URL}api/project/${project_id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +28,7 @@ export default class APIService {
   }
 
   static CreateProject(body, token) {
-    return fetch(`http://127.0.0.1:8000/api/project/`, {
+    return fetch(`${BACKEND_URL}api/project/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +39,7 @@ export default class APIService {
   }
 
   static CreateClient(body, token) {
-    return fetch(`http://127.0.0.1:8000/api/client/`, {
+    return fetch(`${BACKEND_URL}api/client/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +50,7 @@ export default class APIService {
   }
 
   static DeleteClient(client_id, token) {
-    return fetch(`http://127.0.0.1:8000/api/client/${client_id}/`, {
+    return fetch(`${BACKEND_URL}api/client/${client_id}/`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +60,7 @@ export default class APIService {
   }
 
   static LoginUser(body) {
-    return fetch(`http://127.0.0.1:8000/auth/`, {
+    return fetch(`${BACKEND_URL}auth/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +70,7 @@ export default class APIService {
   }
 
   static CreateUser(body) {
-    return fetch(`http://127.0.0.1:8000/api/users/`, {
+    return fetch(`${BACKEND_URL}api/users/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -7,12 +7,16 @@ import FormClient from "./FormClient";
 import APIService from "../../APIService";
 import DetailClient from "./DetailClient";
 
+import dotenv from 'dotenv';
+dotenv.config();
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
+
 const Client = () => {
   const [clients, setClients] = useState([]);
   const [token, setToken] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/client", {
+    fetch(`${BACKEND_URL}/api/client`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +35,7 @@ const Client = () => {
 
   const detailBtn = (client) => {
     setActiveClient(client);
-    fetch(`http://127.0.0.1:8000/api/project?client=${client.id}`, {
+    fetch(`${BACKEND_URL}/api/project?client=${client.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

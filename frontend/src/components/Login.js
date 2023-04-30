@@ -23,17 +23,6 @@ const Login = () => {
     }
   }, [token]);
 
-  // const loginBtn = () => {
-  //   APIService.LoginUser({
-  //     username: username,
-  //     password: password,
-  //   })
-  //     .then((response) => {
-  //       setToken("loginToken", response.token);
-  //       setLogUser("fname", response.fname);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
   const [errorMessage, setErrorMessage] = useState("");
 
   const loginBtn = () => {
