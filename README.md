@@ -1,6 +1,6 @@
 # Django React App - PMS
 
-This is a Project Management System WebApp created using:
+This is a Incident Management System WebApp created using:
 - Django REST Framework as backend
 - React as frontend
 
