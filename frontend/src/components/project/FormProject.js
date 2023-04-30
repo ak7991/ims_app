@@ -96,8 +96,8 @@ function FormProject(props) {
             id="closed_status"
             value={ProjectClosedStatus}
           >
-            <option value="True">True</option>
-            <option value="False">False</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
           </select>
           <br />
 
