@@ -35,7 +35,7 @@ const Client = () => {
 
   const detailBtn = (client) => {
     setActiveClient(client);
-    fetch(`${BACKEND_URL}api/project?client=${client.id}`, {
+    fetch(`${BACKEND_URL}api/incident?client=${client.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
