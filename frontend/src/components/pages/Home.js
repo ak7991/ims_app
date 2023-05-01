@@ -2,35 +2,39 @@ import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 
-import Incident from "../project/Incident";
+import LoginPageRedirect from "../pages/LoginRedirect";
+import Incident from "../incident/Incident";
+
 
 const Home = () => {
-  const [logUser, removeLogUser] = useCookies(["fname"]);
-  // const [token, removeToken] = useCookies(["loginToken"]);
+  const [loggedInStatus, setLoggedInStatus] = useState([]);
+  const [greeting, setGreeting] = useState("");
+  const [logUser, ] = useCookies(["fname"]);
+  const [token] = useCookies(["loginToken"]);
+  const [ , , removeCookie] = useCookies(["loginToken"]);
+
   let history = useHistory();
 
+  useEffect(() => {
+    if (token && token["loginToken"]) {
+      setLoggedInStatus(true);
+      setGreeting(`Hello, `)
+    } else {
+      setLoggedInStatus(false);
+    }
+  });
+
   const logout = () => {
-    // This is still not working. The logout button only causes the cookie value to turn into undefined.
-    // removeToken("loginToken");
-    // removeLogUser("fname");
-
-    // This is such an old school vanilla javascript type. Please find the React way to do this haha :)
-    document.cookie =
-      "loginToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "fname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
+    setLoggedInStatus(false);
+    removeCookie("loginToken");
     history.push("/");
     history.go("/");
   };
 
-  const [greeting, setGreeting] = useState("");
 
-  useEffect(() => {
-    setGreeting("Hello, ");
-  }, []);
-
-  return (
-    <div className="container" style={{ padding: "0 0 5em" }}>
+  const loggedInContent = () => {
+    return (
+      <div className="container" style={{ padding: "0 0 5em" }}>
       <div
         className="header text-white d-flex align-items-center justify-content-between"
         style={{ marginTop: "5em" }}
@@ -44,10 +48,13 @@ const Home = () => {
           </button>
         </div>
       </div>
-
       <Incident />
     </div>
-  );
+    );
+  };
+
+  return loggedInStatus ? loggedInContent() : LoginPageRedirect()
+    
 };
 
 export default Home;
