@@ -6,17 +6,14 @@ import "../Modal.css";
 import APIService from "../../APIService";
 
 function FormIncident(props) {
-  const [IncidentIncidentId, setIncidentIncidentId] = useState("");
-  const [IncidentDeadline, setIncidentDeadline] = useState("");
-  const [IncidentDescription, setIncidentDescription] = useState("");
-  const [IncidentPriority, setIncidentPriority] = useState("");
-  const [IncidentClosedStatus, setIncidentClosedStatus] = useState("");
+  const [IncidentIncidentId, setIncidentIncidentId] = useState();
+  const [IncidentDescription, setIncidentDescription] = useState();
+  const [IncidentPriority, setIncidentPriority] = useState();
+  const [IncidentClosedStatus, setIncidentClosedStatus] = useState();
 
   const [token, setToken] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    // setIncidentName(props.IncidentInstance.name);
-    setIncidentDeadline(props.IncidentInstance.deadline);
     setIncidentDescription(props.IncidentInstance.description);
     setIncidentPriority(props.IncidentInstance.priority);
     setIncidentClosedStatus(props.IncidentInstance.closed_status);
@@ -27,7 +24,6 @@ function FormIncident(props) {
       props.IncidentInstance.id,
       {
         incident_id: IncidentIncidentId,
-        deadline: IncidentDeadline,
         description: IncidentDescription,
         priority: IncidentPriority,
         closed_status: IncidentClosedStatus,
@@ -39,7 +35,6 @@ function FormIncident(props) {
   const createIncident = () => {
     APIService.CreateIncident(
       {
-        deadline: IncidentDeadline,
         description: IncidentDescription,
         priority: IncidentPriority,
         closed_status: IncidentClosedStatus,
@@ -77,7 +72,7 @@ function FormIncident(props) {
             value={IncidentPriority}
             // placeholder="Enter Priority"
           >
-            <option value="none" selected disabled hidden>
+            <option value="none" default>
               Select a priority...
             </option>
             <option value="HIGH">High</option>
