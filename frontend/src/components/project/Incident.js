@@ -12,13 +12,13 @@ dotenv.config();
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
 
 const Incident = () => {
-  const [projects, setIncidents] = useState([]);
+  const [incidents, setIncidents] = useState([]);
   // const [incident, setIncidents] = useState([]);
 
   const [token] = useCookies(["loginToken"]);
 
   useEffect(() => {
-    fetch(`${BACKEND_URL}api/project`, {
+    fetch(`${BACKEND_URL}api/incident`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -32,22 +32,22 @@ const Incident = () => {
 
   const [IncidentInstance, setIncidentInstance] = useState(null);
 
-  const editIncidentBtn = (project) => {
-    setIncidentInstance(project);
+  const editIncidentBtn = (incident) => {
+    setIncidentInstance(incident);
   };
 
-  const updatedIncidents = (project) => {
-    const new_project = projects.map((myproject) => {
-      if (myproject.id === project.id) {
-        return project;
+  const updatedIncidents = (incident) => {
+    const new_incident = incidents.map((myincident) => {
+      if (myincident.id === incident.id) {
+        return incident;
       } else {
-        return myproject;
+        return myincident;
       }
     });
-    setIncidents(new_project);
+    setIncidents(new_incident);
   };
 
-  const projectNewForm = () => {
+  const incidentNewForm = () => {
     setIncidentInstance({
       name: "",
       deadline: "",
@@ -57,16 +57,16 @@ const Incident = () => {
     });
   };
 
-  const createdIncident = (project) => {
-    const new_project = [...projects, project];
-    setIncidents(new_project);
+  const createdIncident = (incident) => {
+    const new_incident = [...incidents, incident];
+    setIncidents(new_incident);
   };
 
   const [ActiveIncident, setActiveIncident] = useState();
 
-  const viewIncidentDetail = (project) => {
-    setActiveIncident(project);
-    fetch(`${BACKEND_URL}api/project?project=${project.id}`, {
+  const viewIncidentDetail = (incident) => {
+    setActiveIncident(incident);
+    fetch(`${BACKEND_URL}api/incident?incident=${incident.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -79,10 +79,10 @@ const Incident = () => {
   return (
     <div style={{ marginTop: "5em" }}>
       <div className="d-flex align-items-center justify-content-between">
-        <div className="project-header">
+        <div className="incident-header">
           <h1 style={{ color: "burlywood" }}>Reported Incidents</h1>
         </div>
-        <div className="project-header-btn d-flex">
+        <div className="incident-header-btn d-flex">
           <div className="input-group">
             <select className="custom-select" id="inputGroupSelect01">
               <option selected>Filter...</option>
@@ -92,8 +92,8 @@ const Incident = () => {
             </select>
           </div>
           <button
-            className="btn btn-primary btn-sm project-add-btn"
-            onClick={projectNewForm}
+            className="btn btn-primary btn-sm incident-add-btn"
+            onClick={incidentNewForm}
           >
             &#43; Report Incident
           </button>
@@ -102,24 +102,24 @@ const Incident = () => {
 
       <hr className="bg-light" />
       <div className="proj-wrapper text-white">
-        {projects.map((project) => {
+        {incidents.map((incident) => {
           return (
-            <div key={project.id} className="">
-              <h3>{project.name}</h3>
-              <p>Incident ID: {project.incident_id} </p>
-              <p>Reported_on: {dateFormat(project.date_created, "hh:MM mmmm dS, yyyy")}</p>
-              <p>Description: {project.description}</p>
-              <p>Priority: {project.priority}</p>
-              <p>Status: {String(project.closed_status)}</p>
-              <div className="project-btn-wrapper">
+            <div key={incident.id} className="">
+              <h3>{incident.name}</h3>
+              <p>Incident ID: {incident.incident_id} </p>
+              <p>Reported_on: {dateFormat(incident.date_created, "hh:MM mmmm dS, yyyy")}</p>
+              <p>Description: {incident.description}</p>
+              <p>Priority: {incident.priority}</p>
+              <p>Status: {String(incident.closed_status)}</p>
+              <div className="incident-btn-wrapper">
                 <button
-                  onClick={() => viewIncidentDetail(project)}
+                  onClick={() => viewIncidentDetail(incident)}
                   className="btn btn-primary btn-sm"
                 >
                   View
                 </button>
                 <button
-                  onClick={() => editIncidentBtn(project)}
+                  onClick={() => editIncidentBtn(incident)}
                   className="btn btn-primary btn-sm mx-3"
                 >
                   Update
