@@ -47,6 +47,28 @@ const Login = () => {
       });
   };
 
+  const forgotPasswordBtn = () => {
+    APIService.forgotPassword({
+      username: username,
+      email: email,
+    })
+      .then((response) => {
+        if (response.token) {
+          setToken("loginToken", response.token);
+          setLogUser("fname", response.fname);
+        } else {
+          setErrorMessage("An error occurred. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 400)) {
+          setErrorMessage("Invalid username or password");
+        } else {
+          setErrorMessage("An error occurred. Please try again later.");
+        }
+      });
+  };
+
   const registerBtn = () => {
     APIService.CreateUser({
       username: username,
@@ -59,77 +81,117 @@ const Login = () => {
       .catch((error) => console.log(error));
   };
 
+  const RegistrationFields = () => {
+    return (
+
+      <div className="text-white">
+        <h1 className="text-white">Registration Page</h1>
+        <hr className="bg-white" />
+        <label htmlFor="username" className="form-label text-light">
+          Username
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="username"
+          placeholder="Enter username..."
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br />
+        <label htmlFor="fname">First Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="fname"
+          placeholder="Enter first name..."
+          value={fname}
+          onChange={(e) => setFname(e.target.value)}
+        />
+        <br />
+        <label htmlFor="lname">Last Name</label>
+        <input
+          type="text"
+          className="form-control"
+          id="lname"
+          placeholder="Enter last name..."
+          value={lname}
+          onChange={(e) => setLname(e.target.value)}
+        />
+        <br />
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          className="form-control"
+          id="email"
+          placeholder="Enter email..."
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
+        <label htmlFor="username" className="form-label text-light">
+          Password
+        </label>    
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          placeholder="Enter password..."
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+    </div>
+    );
+  };
+  const loginFields = () => {
+    return (
+      <div>
+        <h1 className="text-white">Login Page</h1>
+        <hr className="bg-white" />
+        <label htmlFor="username" className="form-label text-light">
+        Username
+        </label>
+        <input
+          type="text"
+          className="form-control"
+          id="username"
+          placeholder="Enter username..."
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br />
+        <label htmlFor="username" className="form-label text-light">
+          Password
+        </label>    
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          placeholder="Enter password..."
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+      </div>
+    );
+  };
+
   return (
     <div className="container" style={{ marginTop: "10em" }}>
-      {isLogin ? (
-        <h1 className="text-white">Login Page</h1>
-      ) : (
-        <h1 className="text-white">Registration Page</h1>
-      )}
 
-      <hr className="bg-white" />
-      <label htmlFor="username" className="form-label text-light">
-        Username
-      </label>
-      <input
-        type="text"
-        className="form-control"
-        id="username"
-        placeholder="Enter username..."
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      {isLogin ? null : (
-        <div className="text-white">
-          <br />
-          <label htmlFor="fname">First Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="fname"
-            placeholder="Enter first name..."
-            value={fname}
-            onChange={(e) => setFname(e.target.value)}
-          />
-          <br />
-          <label htmlFor="lname">Last Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="lname"
-            placeholder="Enter last name..."
-            value={lname}
-            onChange={(e) => setLname(e.target.value)}
-          />
-          <br />
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            placeholder="Enter email..."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-      )}
-      <br />
-      <label htmlFor="username" className="form-label text-light">
-        Password
-      </label>
-      <input
-        type="password"
-        className="form-control"
-        id="password"
-        placeholder="Enter password..."
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      {isLogin ? (loginFields()) : (RegistrationFields())};
       <br />
       {isLogin ? (
+        <div>
         <button onClick={loginBtn} className="btn btn-primary">
           Login
         </button>
+        <button onClick={forgotPasswordBtn} className="btn btn-primary">
+        Forgot password
+      </button>
+        </div>
+
       ) : (
         <button onClick={registerBtn} className="btn btn-primary">
           Register

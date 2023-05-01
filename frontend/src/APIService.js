@@ -69,6 +69,16 @@ export default class APIService {
     }).then((response) => response.json());
   }
 
+  static ForgotPassword(body) {
+    return fetch(`${BACKEND_URL}auth/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }).then((response) => response.json());
+  }
+
   static CreateUser(body) {
     return fetch(`${BACKEND_URL}api/users/`, {
       method: "POST",
