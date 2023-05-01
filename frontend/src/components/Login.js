@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useCookies(["loginToken"]);
-  const [logUser, setLogUser] = useCookies(["fname"]);
+  const [ , setLogUser] = useCookies(["fname"]);
   const [isLogin, setLogin] = useState(true);
   let history = useHistory();
 
@@ -21,9 +21,9 @@ const Login = () => {
     if (token["loginToken"]) {
       history.push("/home");
     }
-  }, [token]);
+  }, [token, history]);
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const [ , setErrorMessage] = useState("");
 
   const loginBtn = () => {
     APIService.LoginUser({
