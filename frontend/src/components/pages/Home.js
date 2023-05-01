@@ -10,8 +10,8 @@ const Home = () => {
   const [loggedInStatus, setLoggedInStatus] = useState([]);
   const [greeting, setGreeting] = useState("");
   const [logUser, ] = useCookies(["fname"]);
-  const [token] = useCookies(["loginToken"]);
-  const [ , , removeCookie] = useCookies(["loginToken"]);
+  const [token, , removeCookie] = useCookies(["loginToken"]);
+
 
   let history = useHistory();
 
