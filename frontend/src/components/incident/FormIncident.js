@@ -6,12 +6,12 @@ import "../Modal.css";
 import APIService from "../../APIService";
 
 function FormIncident(props) {
-  const [IncidentIncidentId, setIncidentIncidentId] = useState();
+  const [IncidentIncidentId, ] = useState();
   const [IncidentDescription, setIncidentDescription] = useState();
   const [IncidentPriority, setIncidentPriority] = useState();
   const [IncidentClosedStatus, setIncidentClosedStatus] = useState();
 
-  const [token, setToken] = useCookies(["loginToken"]);
+  const [token, ] = useCookies(["loginToken"]);
 
   useEffect(() => {
     setIncidentDescription(props.IncidentInstance.description);

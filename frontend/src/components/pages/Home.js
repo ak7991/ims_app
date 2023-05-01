@@ -22,7 +22,7 @@ const Home = () => {
     } else {
       setLoggedInStatus(false);
     }
-  });
+  }, [token]);
 
   const logout = () => {
     setLoggedInStatus(false);
